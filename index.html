@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .form{
+        box-shadow: 0px 0px 8px grey;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        width: fit-content;
+        width: 500px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 150px auto;
+        transform: scale(1.4);
+    }
+    .form input{
+        width: 90%;
+        border-color: rgb(202, 202, 202);
+        outline: none;
+        border: none;
+        border: 1px solid;
+        border-radius: 3px;
+        padding: 6px;
+    }
+    .form button{
+        border: none;
+        padding: 7px;
+        border-radius: 8px;
+        width: 45%;
+        background-color: rgb(0, 140, 255);
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 500;
+         transition: 0.3s;
+    }
+    .form button:hover{
+        cursor: pointer;
+        transform: translateY(-10px);
+        transition: 0.3s;
+        box-shadow: 0px 2px 8px rgb(49, 136, 236);
+        text-shadow: 0px 0px 8px white;
+    }
+    p{
+        width: fit-content;
+        border-radius: 5px;
+        border: 1px solid;
+        padding: 10px;
+    }
+</style>
+<body>
+    <!-- CRUD -->
+    <div class="form">
+        <h2 style="text-align: center; border-bottom: 1px solid; border-top: 1px solid;">CRUD</h2>
+    <!-- Create student -->
+    <h1>Create student</h1>
+    <label for="">Input name: </label><br><br>
+    <input type="text" id="name" placeholder="Please input a name..." required><br><br>
+    <label for="">Input Age: </label><br><br>
+    <input type="text" id="age" placeholder="Please input a Age.." required><br><br>
+    <button type="button" id="btn">Add student</button>
+    <button type="button" id="clear" >Clear ❌</button>
+    <p id="text"></p>
+
+    <!-- Read all students and specific with id -->
+    <h1>Read student</h1>
+    <label for="">Look for student: </label><br><br>
+    <input type="text" id="id" placeholder="Input student id..."><br><br>
+    <button type="button" id="btn3">Get student by id</button>
+     <button type="button" id="btn2">Get all students</button>
+    <p id="text2"></p>
+
+    <!-- Update student -->
+     <h1>update students</h1>
+     <label for="">Choose student to edit: </label><br><br>
+    <input type="text" id="s_id" placeholder="Input student id..."><br><br>
+    <button type="button" id="btn4">Get student by id</button>
+      <p id="text4"></p>
+      <label for="">Change name: </label>
+    <input type="text" id="name_c" placeholder="change student name.."><br><br>
+    <label for="">Age: </label>
+    <input type="text" id="age_c" placeholder="Change student age..."><br><br>
+    <p id="text3"></p>
+    </div>
+     <label for=""></label>
+    </div>
+     
+
+
+</body>
+</html>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById('btn');
+        const btn2 = document.getElementById('btn2');
+        const user = document.getElementById('name');
+        const id = document.getElementById('id');
+        const text = document.getElementById('text');
+        const text2 = document.getElementById('text2');
+        const btn3 = document.getElementById('btn3')
+        const clear = document.getElementById('clear');
+        const age = document.getElementById('age');
+        const text4 = document.getElementById('text4')
+        const Newname  = document.getElementById('name_c');
+        const Newage = document.getElementById('age_c');
+        const student_id = document.getElementById('s_id');
+        const btn4 = document.getElementById('btn4');
+       
+        clear.addEventListener("click", () => {
+            text.innerHTML = "";
+            text2.innerHTML = "";
+        });
+
+        // Add student
+        let students = [
+        { id: 50, name: "Mugisha Yvan", age: 18 },
+         { id: 20, name: "Levi", age: 17 },
+
+        ];
+
+        let ids  = 0
+        btn.addEventListener("click", () => {
+            ids++;
+            students.push({id:  ids ,name: user.value.trim() , age: age.value})
+            text.innerHTML = ` ✅Succesfully added! <br>id: ${ids} <br> Name: ${user.value} <br> Age:  ${age.value}`;
+            text.style.color = "green";
+             console.log("✅Student succesfully added!: ")
+             console.log(`id: ${ids} || Name: ${user.value.trim()} || Age: ${age.value}`);
+              });
+    
+            /*--------------------------
+                Looking for student
+            ----------------------------*/
+    //Get all students
+    btn2.addEventListener("click", () => {
+        text2.innerHTML = '✅All students: <br><br> ';
+        text2.innerHTML += students
+        .map(n => `${n.id}.|| id:  ${n.id} || name: ${n.name} || Age: ${n.age} <br>`)
+        .join('<br>');
+        text2.style.color = "green";
+        console.log("✅All students: ")
+        console.log( students);
+         });
+      
+    //get student by id (Very cool)
+    btn3.addEventListener("click", () => {
+        const id2 = Number(id.value);
+        let student = students.find(s => s.id === id2);
+
+        if(!student){
+            text2.style.color = "Red";
+            text2.innerHTML = ` ❌No such student as ${id2}`;
+            console.log(`❌No such student as ${id2}`);
+        }else{
+        text2.innerHTML = `✅Student found with id: ${student.id} <br> Name : ${student.name} <br> Age: ${student.age}`;
+        text2.style.color = "green";
+        console.log(`✅Student found with id: ${student.id} <br> Name : ${student.name} <br> Age: ${student.age}`);
+        }
+
+    });
+
+    //Update students
+
+btn4.addEventListener("click", () => {
+        const id2 = Number(student_id.value);
+        let student = students.find(s => s.id === id2);
+
+        if(!student){
+            text4.style.color = "Red";
+            text4.innerHTML = ` ❌No such student as ${id2}`;
+            console.log(`❌No such student as ${id2}`);
+        }
+        text4.innerHTML = `✅Student found with id: ${student.id} <br> Name : ${student.name} <br> Age: ${student.age}`;
+        text4.style.color = "green";
+        console.log(`✅Student found with id: ${student.id} <br> Name : ${student.name} <br> Age: ${student.age}`);
+        
+        student.name = String(Newname.value);
+        student.age = Number(Newage.value);
+
+        text4.innerHTML = 
+    });
+    });
+</script>

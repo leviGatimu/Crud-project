@@ -1,0 +1,170 @@
+<script>
+// text.textContent = "Hi";   // change
+// text.textContent === "Hi" // check
+// setinterval(() => {Acion, interval})
+// clearInternval(timerid)
+
+document.addEventListener("DOMContentLoaded",  () => { 
+    const timer = document.getElementById('timer');
+    const text = document.getElementById('text');
+    const btn = document.getElementById('btn');
+    const btn2 = document.getElementById('btn2');
+
+
+    btn2.addEventListener("click", () => {
+        text.innerHTML = timer.value;
+    });
+
+    btn.addEventListener("click", () => {
+        let time = Number(timer.value);
+        const timeId = setInterval(() => {
+            time -= 1;
+            if(time<0){
+            clearInterval(timeId);
+            time = timer.value;
+        }
+        text.innerHTML = time;
+        }, 1000);
+        
+    })
+})
+    
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+     
+  <div class="box">
+    <input type="text" id="timer" placeholder="input timer">
+     <button type="button" id="btn2">Submit</button>
+  <p id="text"></p><br><br>
+  <button id="btn">Start/stop</button>
+  
+  </div>
+
+<style>
+ /* Page layout - unchanged */
+body{
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #f3f4f6;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Card - unchanged */
+.box{
+  width: min(420px, 92vw);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Timer display - unchanged */
+#text{
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #111827;
+  padding: 18px 16px;
+  border-radius: 14px;
+  background: #f9fafb;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Button - unchanged */
+#btn{
+  width: 100%;
+  border: none;
+  padding: 14px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.28);
+}
+
+#btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.34);
+}
+
+#btn:active{
+  transform: translateY(0px);
+  opacity: 0.9;
+}
+
+/* ─────────────────────────────────────────────── */
+/* Only these two elements are improved below      */
+/* ─────────────────────────────────────────────── */
+
+/* Input */
+#timer {
+  width: 100%;
+  max-width: 240px;
+  padding: 14px 16px;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+  border: 2px solid #d1d5db;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #111827;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+}
+
+#timer:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  background: #ffffff;
+}
+
+#timer::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+  font-weight: 400;
+}
+
+/* Submit button */
+#btn2 {
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: #3b82f6;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
+}
+
+#btn2:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.3);
+}
+
+#btn2:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+</style>
+
+</body>
+</html>
